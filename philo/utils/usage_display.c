@@ -6,7 +6,7 @@
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 08:32:56 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/02 11:38:49 by wabolles         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:54:40 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ static void	ft_putstr(char *s)
 {
 	while (*s)
 		write(2, s++, 1);
+}
+
+int	err(char *error)
+{
+	write(2, "\n", 1);
+	while (*error)
+		write(2, error++, 1);
+	write(2, "\n", 1);
+	return (FAILURE);
 }
 
 int	usage_display(void)
