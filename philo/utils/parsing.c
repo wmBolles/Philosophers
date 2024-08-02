@@ -6,7 +6,7 @@
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:11:25 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/02 11:54:56 by wabolles         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:15:47 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ static int	is_valid(char *arg)
 	return (SUCCESS);
 }
 
-int	parse_number(char *n)
+static int	parse_number(char *n)
 {
-	int		number;
+	long		number;
 
 	number = ft_atoi(n);
-	if (number == -1)
-		return (FAILURE);
+	if (number < -2147483648)
+		return (err("\033[31mError[2]: digit < MIN_INT\033[0m\n"));
+	else if (number > 2147483647)
+		return (err("\033[31mError[2]: digit > MAX_INT\033[0m\n"));
 	if (number <= 0)
 		return (err("\033[31mError[7]: number <= 0\033[0m\n"));
 	return (SUCCESS);
@@ -64,9 +66,9 @@ int	parse_args(int ac, char *av[], t_philo *data)
 	index = 1;
 	while (index < ac)
 	{
-		if (is_valid(av[index]) == -1)
+		if (is_valid(av[index]))
 			return (FAILURE);
-		if (parse_number(av[index]) == -1)
+		if (parse_number(av[index]))
 			return (FAILURE);
 		index++;
 	}
