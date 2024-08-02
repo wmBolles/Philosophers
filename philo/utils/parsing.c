@@ -6,40 +6,44 @@
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:11:25 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/02 10:56:04 by wabolles         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:48:38 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	is_valid(char *arg)
+static int	is_valid(char *arg)
 {
 	int		index;
 
 	index = 0;
 	if (*arg == '\0')
-		exit_err("\033[31mError[6]: empty argument !\n\033[0m");
+		return (print_err("\033[31mError[6]: empty argument !\n\033[0m"));
 	while (arg[index] == '-' || arg[index] == '+')
 		index++;
 	if (arg[index] == '\0')
-			exit_err("\033[31mError[5]: invalid number !\033[0m\n");
+			return (print_err("\033[31mError[5]: invalid number !\033[0m\n"));
 	if (!(arg[index] >= '0' && arg[index] <= '9'))
-			exit_err("\033[31mError[4]: argument is not valid !\033[0m\n");
+			return (print_err("\033[31mError[4]: argument is not valid !\033[0m\n"));
 	while (arg[index])
 	{
 		if (!(arg[index] >= '0' && arg[index] <= '9'))
-			exit_err("\033[31mError[4]: argument is not valid !\033[0m\n");
+			return (print_err("\033[31mError[4]: argument is not valid !\033[0m\n"));
 		index++;
 	}
+	return (SUCCESS);
 }
 
-void	parse_number(char *n)
+int	parse_number(char *n)
 {
 	int		number;
 
 	number = ft_atoi(n);
+	if (number == -1)
+		return (FAILURE);
 	if (number <= 0)
-		exit_err("\033[31mError[7]: number <= 0\033[0m\n");
+		return(print_err("\033[31mError[7]: number <= 0\033[0m\n"));
+	return (SUCCESS);
 }
 
 void	init_numbers(int ac, char *av[], t_philo *data)
@@ -53,16 +57,19 @@ void	init_numbers(int ac, char *av[], t_philo *data)
 		data->optional = ft_atoi(av[5]);
 }
 
-void	parse_args(int ac, char *av[], t_philo *data)
+int	parse_args(int ac, char *av[], t_philo *data)
 {
 	int		index;
 
 	index = 1;
 	while (index < ac)
 	{
-		is_valid(av[index]);
-		parse_number(av[index]);
+		if (is_valid(av[index]) == -1)
+			return (FAILURE);
+		if (parse_number(av[index]) == -1)
+			return (FAILURE);
 		index++;
 	}
 	init_numbers(ac, av, data);
+	return (SUCCESS);
 }
