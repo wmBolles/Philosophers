@@ -6,7 +6,7 @@
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 08:32:56 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/02 16:04:07 by wabolles         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:32:27 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	err(char *error)
 int	usage_display(void)
 {
 	ft_putstr("\033[31m\n");
-	ft_putstr("Error[1]: Please enter 5 arguments after ./philo\n");
+	ft_putstr("Please enter 5 arguments after ./philo\n");
 	ft_putstr("\033[33m\n");
 	ft_putstr("number_of_philosophers\n");
 	ft_putstr("time_to_eat\n");
