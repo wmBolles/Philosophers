@@ -6,7 +6,7 @@
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:11:25 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/08 14:35:50 by wabolles         ###   ########.fr       */
+/*   Updated: 2024/08/13 07:22:53 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static int	is_valid(char *arg)
 		return (err("\033[31mempty argument !\n\033[0m"));
 	while (arg[index] == '-' || arg[index] == '+')
 		index++;
-	if (!(arg[index] >= '0' && arg[index] <= '9'))
-		return (err("\033[31margument is not valid !\033[0m\n"));
 	while (arg[index])
 	{
 		if (!(arg[index] >= '0' && arg[index] <= '9'))
@@ -41,7 +39,7 @@ static int	parse_number(char *n)
 		return (err("\033[31mnumber < MIN_INT\033[0m\n"));
 	else if (number > 2147483647)
 		return (err("\033[31mnumber > MAX_INT\033[0m\n"));
-	if (number <= 0)
+	else if (number <= 0)
 		return (err("\033[31mnumber <= 0\033[0m\n"));
 	return (SUCCESS);
 }

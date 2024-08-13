@@ -6,7 +6,7 @@
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 09:00:37 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/07 22:51:57 by wabolles         ###   ########.fr       */
+/*   Updated: 2024/08/13 07:25:31 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <string.h>
 # include <stdio.h>
 
-enum	e_exits
+enum	e_status
 {
 	SUCCESS = 0,
 	FAILURE = 1
