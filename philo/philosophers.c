@@ -5,23 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wabolles <wabolles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 09:01:51 by wabolles          #+#    #+#             */
-/*   Updated: 2024/08/02 16:03:31 by wabolles         ###   ########.fr       */
+/*   Created: 2024/10/11 10:31:08 by wabolles          #+#    #+#             */
+/*   Updated: 2024/12/01 21:24:25 by wabolles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "includes.h"
 
-int	main(int ac, char *av[])
+int
+	main(int ac, char *av[])
 {
-	t_philo		data;
+	t_table		table;
 
-	if (ac < 5 || ac > 6)
-		return (usage_display());
-	if (parse_args(ac, av, &data))
+	if (parse_args(ac, av, &table))
 		return (FAILURE);
-	printf("%d\n %d\n %d\n %d\n %d\n %d \n",data.n_philo, data.n_forks
-									, data.t_to_die, data.t_to_eat, data.t_to_sleep,
-									 data.optional);
+	if (table.n_philo == 1)
+	{
+		table.first = get_time();
+		output(&table, "has taken a fork", table.philos[0].pid);
+		exact_sleep(table.t_to_die);
+		printf("%lld ", get_time() - table.first);
+		printf("%d died\n", table.philos[0].pid + 1);
+		return (SUCCESS);
+	}
+	if (simulation(&table))
+		return (FAILURE);
 	return (SUCCESS);
 }
